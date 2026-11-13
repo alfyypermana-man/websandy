@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study UX - SMAN 16 Bekasi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #2563eb;
+    --dark: #172554;
+    --text: #334155;
+    --muted: #64748b;
+    --bg: #f8fafc;
+    --border: #e2e8f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 265px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 30px 22px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.logo-icon {
+    background: var(--primary);
+    color: white;
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 17px;
+}
+
+.logo h3 {
+    font-size: 14px;
+    color: var(--dark);
+    line-height: 1.4;
+}
+
+.logo span {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.menu-title {
+    font-size: 10px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1.5px;
+    margin: 24px 0 10px;
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: #64748b;
+    font-size: 13px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    margin-bottom: 3px;
+    transition: .2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    color: var(--primary);
+    background: #eff6ff;
+    font-weight: 700;
+}
+
+/* MAIN */
+.main {
+    margin-left: 265px;
+    padding: 55px 7%;
+    max-width: 1450px;
+}
+
+.menu-toggle {
+    display: none;
+    padding: 9px 14px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    padding: 48px;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 55px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "16";
+    position: absolute;
+    right: 30px;
+    bottom: -90px;
+    font-size: 270px;
+    font-weight: 800;
+    color: rgba(255,255,255,.06);
+}
+
+.tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255,255,255,.15);
+    padding: 7px 13px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 4vw, 43px);
+    line-height: 1.3;
+    max-width: 700px;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    color: #dbeafe;
+    max-width: 690px;
+    font-size: 14px;
+}
+
+.hero-button {
+    display: inline-block;
+    margin-top: 25px;
+    background: white;
+    color: var(--primary);
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+/* SECTION */
+section {
+    margin-bottom: 65px;
+    scroll-margin-top: 35px;
+}
+
+.section-label {
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: var(--dark);
+    font-size: 27px;
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+h3 {
+    color: var(--dark);
+    font-size: 17px;
+    margin: 25px 0 12px;
+}
+
+p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+ul {
+    padding-left: 22px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+li {
+    margin-bottom: 9px;
+}
+
+/* CARDS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 22px;
+    border-radius: 13px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(15,23,42,.06);
+}
+
+.card .number {
+    color: var(--primary);
+    font-size: 23px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+}
+
+.card p {
+    font-size: 12px;
+    margin: 0;
+}
+
+/* TABLE */
+.table-wrap {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 550px;
+    font-size: 12px;
+}
+
+th {
+    background: #eff6ff;
+    color: var(--dark);
+    text-align: left;
+    padding: 15px;
+}
+
+td {
+    padding: 14px 15px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+}
+
+.status {
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* DOCUMENT */
+.document {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 23px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.document h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.document p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.document a {
+    background: #eff6ff;
+    color: var(--primary);
+    padding: 9px 13px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* IMAGE PLACEHOLDER */
+.image-placeholder {
+    width: 100%;
+    min-height: 190px;
+    border: 2px dashed #bfdbfe;
+    background: #eff6ff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+    margin-top: 18px;
+    color: var(--primary);
+}
+
+.image-placeholder strong {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.image-placeholder span {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.image-link {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    text-decoration: none;
+}
+
+.image-link .photo-box {
+    width: 100%;
+    min-height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-link:hover .photo-box {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+/* FOOTER */
+footer {
+    border-top: 1px solid var(--border);
+    padding-top: 25px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: .3s;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 25px 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        padding: 30px 24px;
+    }
+}
+
+@media(max-width: 550px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .document {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">16</div>
+        <div>
+            <h3>SMAN 16 BEKASI</h3>
+            <span>UX Research Project</span>
+        </div>
+    </div>
+
+    <div class="menu-title">OVERVIEW</div>
+    <a href="#overview" class="active">Overview</a>
+    <a href="#masalah">Masalah</a>
+    <a href="#alur">Alur Pengerjaan</a>
+
+    <div class="menu-title">PENGUJIAN PERTAMA</div>
+    <a href="#sorting1">Card Sorting 1</a>
+    <a href="#seq1">Formulir SEQ</a>
+    <a href="#wawancara1">Wawancara</a>
+    <a href="#laporan1">Laporan 1</a>
+
+    <div class="menu-title">DESAIN / MOCKUP</div>
+    <a href="#mockup">Mockup</a>
+    <a href="#prototype">Prototype</a>
+
+    <div class="menu-title">PENGUJIAN ULANG</div>
+    <a href="#perbaikan">Perbaikan</a>
+    <a href="#sorting2">Card Sorting 2</a>
+    <a href="#seq2">Formulir SEQ 2</a>
+    <a href="#laporan2">Laporan 2</a>
+
+    <div class="menu-title">LAINNYA</div>
+    <a href="#dokumen">Dokumen</a>
+    <a href="#pembelajaran">Yang Dipelajari</a>
+
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<button class="menu-toggle" onclick="toggleMenu()">
+    ☰ Menu Navigasi
+</button>
+
+<!-- HERO -->
+<div class="hero" id="overview">
+
+    <span class="tag">CASE STUDY · UX RESEARCH</span>
+
+    <h1>Evaluasi Usability Website<br>SMAN 16 Bekasi.</h1>
+
+    <p>
+        Penelitian dan evaluasi pengalaman pengguna untuk
+        meningkatkan kemudahan akses informasi, kenyamanan,
+        dan kualitas layanan digital SMAN 16 Bekasi.
+    </p>
+
+    <a href="#masalah" class="hero-button">
+        Lihat Studi Kasus →
+    </a>
+
+</div>
+
+<!-- OVERVIEW -->
+<section id="masalah">
+
+    <div class="section-label">01 · Overview</div>
+
+    <h2>Permasalahan dan Tujuan Penelitian</h2>
+
+    <p>
+        Website sekolah merupakan media informasi digital
+        yang membantu siswa, guru, orang tua, dan masyarakat
+        mendapatkan informasi mengenai sekolah.
+    </p>
+
+    <p>
+        Penelitian ini bertujuan mengevaluasi kemudahan
+        penggunaan website SMAN 16 Bekasi serta menemukan
+        bagian yang perlu diperbaiki berdasarkan pengalaman pengguna.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="number">01</div>
+            <h3>UX Research</h3>
+            <p>Mengidentifikasi kebutuhan dan pengalaman pengguna.</p>
+        </div>
+
+        <div class="card">
+            <div class="number">02</div>
+            <h3>Usability Testing</h3>
+            <p>Mengevaluasi kemudahan penggunaan website.</p>
+        </div>
+
+        <div class="card">
+            <div class="number">03</div>
+            <h3>UI Improvement</h3>
+            <p>Membuat rekomendasi perbaikan tampilan website.</p>
+        </div>
+
+    </div>
+
+    <h3>Identitas Penelitian</h3>
+
+    <div class="table-wrap">
+        <table>
+            <tr><th>Keterangan</th><th>Informasi</th></tr>
+            <tr><td>Objek Penelitian</td><td>Website SMAN 16 Bekasi</td></tr>
+            <tr><td>Bidang</td><td>UX Research & UI Design</td></tr>
+            <tr><td>Metode</td><td>Usability Testing dan SEQ</td></tr>
+            <tr><td>Peneliti</td><td>Dede Sandy</td></tr>
+            <tr><td>Periode</td><td>Oktober-November 2026</td></tr>
+            <tr><td>Tools</td><td>Visual Studio Code, Figma, Google Forms</td></tr>
+        </table>
+    </div>
+
+</section>
+
+<!-- ALUR -->
+<section id="alur">
+
+    <div class="section-label">02 · Process</div>
+
+    <h2>Alur Pengerjaan</h2>
+
+    <p>
+        Proses penelitian dilakukan melalui beberapa tahapan
+        untuk memperoleh hasil evaluasi yang terstruktur.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="number">01</div>
+            <h3>Pengujian Pertama</h3>
+            <p>Menganalisis website dan mengumpulkan pendapat pengguna.</p>
+        </div>
+
+        <div class="card">
+            <div class="number">02</div>
+            <h3>Desain Ulang</h3>
+            <p>Menyusun rancangan antarmuka berdasarkan hasil evaluasi.</p>
+        </div>
+            
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CARD SORTING 1 -->
+<section id="sorting1">
+
+    <div class="section-label">03 · First Testing</div>
+
+    <h2>Card Sorting 1 — Struktur Website</h2>
+
+    <p>
+        Card sorting digunakan untuk memahami bagaimana pengguna
+        mengelompokkan informasi yang terdapat pada website sekolah.
+    </p>
+
+    <div class="table-wrap">
+        <table>
+            <tr>
+                <th>Kategori</th>
+                <th>Kartu / Isi Website</th>
+                <th>Catatan</th>
+            </tr>
+            <tr>
+                <td>Profil</td>
+                <td>Sejarah, Visi, Misi</td>
+                <td>Perlu dievaluasi</td>
+            </tr>
+            <tr>
+                <td>Akademik</td>
+                <td>Informasi pembelajaran</td>
+                <td>Perlu dievaluasi</td>
+            </tr>
+            <tr>
+                <td>Kesiswaan</td>
+                <td>Ekstrakurikuler, kegiatan siswa</td>
+                <td>Perlu dievaluasi</td>
+            </tr>
+            <tr>
+                <td>Informasi</td>
+                <td>Berita, pengumuman, kontak</td>
+                <td>Perlu dievaluasi</td>
+            </tr>
+        </table>-
+    </div>
+
+    <a class="image-link" href="dokumentasi.jpeg" target="_blank" rel="noopener noreferrer">
+        <div class="photo-box" aria-label="Dokumentasi Card Sorting 1" style="background-image: linear-gradient(rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.12)), url('dokumentasi.jpeg');"></div>
+    </a>
+
+</section>
+
+<!-- SEQ 1 -->
+<section id="seq1">
+
+    <div class="section-label">04 · Questionnaire</div>
+
+    <h2> Pengujian SEQ</h2>
+
+    <p>
+        Single Ease Question (SEQ) merupakan metode untuk
+        mengetahui tingkat kemudahan pengguna dalam menyelesaikan
+        suatu tugas pada website.
+    </p>
+
+    <div class="card">
+        <h3>Skala Penilaian</h3>
+        <p>1 = Sangat Sulit</p>
+        <p>2 = Sulit</p>
+        <p>3 = Cukup Sulit</p>
+        <p>4 = Netral</p>
+        <p>5 = Cukup Mudah</p>
+        <p>6 = Mudah</p>
+        <p>7 = Sangat Mudah</p>
+    </div>
+
+    <a class="image-link" href="SEQ.jpeg" target="_blank" rel="noopener noreferrer">
+        <div class="photo-box" aria-label="Dokumentasi Formulir Pengujian SEQ" style="background-image: linear-gradient(rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.12)), url('SEQ.jpeg');"></div>
+    </a>
+
+</section>
+
+<!-- WAWANCARA -->
+<section id="wawancara1">
+
+    <div class="section-label">05 · Interview</div>
+
+    <h2>Wawancara Pengguna</h2>
+
+    <p>
+        Wawancara dilakukan untuk mengetahui pendapat pengguna
+        mengenai tampilan, navigasi, dan informasi pada website.
+    </p>
+
+    <div class="card">
+        <h3>Contoh Pertanyaan</h3>
+        <ul>
+            <li>Apakah informasi sekolah mudah ditemukan?</li>
+            <li>Apakah navigasi website mudah dipahami?</li>
+            <li>Bagian mana yang perlu diperbaiki?</li>
+            <li>Apakah tampilan website nyaman digunakan?</li>
+        </ul>
+    </div>
+
+ <a href="2.jpeg" target="_blank">
+    <img src="2.jpeg" alt="Dokumentasi Wawancara Pengguna">
+</a>
+</section>
+
+
+</section>
+
+<!-- MOCKUP -->
+<section id="mockup">
+
+    <div class="section-label">07 · UI Design</div>
+
+    <h2>Desain Mockup Website</h2>
+
+    <p>
+        Mockup merupakan rancangan visual website SMAN 16 Bekasi
+        yang menampilkan susunan halaman, warna, tipografi,
+        dan elemen antarmuka.
+    </p>
+
+    <a class="image-link" href="1.png" target="_blank" rel="noopener noreferrer">
+        <div class="photo-box" aria-label="Preview Mockup Website SMAN 16 Bekasi" style="background-image: linear-gradient(rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.12)), url('1.png');"></div>
+    </a>
+
+</section>
+
+<!-- PROTOTYPE -->
+<section id="prototype">
+
+    <div class="section-label">08 · Prototype</div>
+
+    <h2>Prototype Interaktif</h2>
+
+    <p>
+        Prototype merupakan rancangan website yang dapat
+        dijelajahi melalui tombol, menu, dan navigasi interaktif.
+    </p>
+
+    <div class="document">
+        <div>
+            <h3>🎨 Prototype Figma</h3>
+            <p>Masukkan tautan prototype desain SMAN 16 Bekasi.</p>
+        </div>
+        <a href="https://www.figma.com/proto/n1AvOv668hfXZlMOED83ph/Untitled?node-id=2009-1132&p=f&t=N2wtUtYKXvPIH2mI-1&scaling=contain&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2009%3A1072&show-proto-sidebar=1" target="_blank">Buka Figma ↗</a>
+    </div>
+
+</section>
+
+<!-- PERBAIKAN -->
+<section id="perbaikan">
+
+    <div class="section-label">09 · Improvement</div>
+
+    <h2>Perbaikan dari Pengujian Pertama</h2>
+
+    <p>
+        Perbaikan dilakukan berdasarkan hasil evaluasi
+        dan masukan dari pengguna.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="number">01</div>
+            <h3>Navigasi</h3>
+            <p>Menyusun menu agar lebih mudah dipahami.</p>
+        </div>
+
+        <div class="card">
+            <div class="number">02</div>
+            <h3>Informasi</h3>
+            <p>Memperjelas akses informasi sekolah.</p>
+        </div>
+
+        <div class="card">
+            <div class="number">03</div>
+            <h3>Tampilan</h3>
+            <p>Meningkatkan konsistensi desain antarmuka.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SORTING 2 -->
+<section id="sorting2">
+
+    <div class="section-label">10 · Second Testing</div>
+
+
+    <h2>Yang Saya Pelajari</h2>
+
+    <div class="card">
+        <h3>01. Pentingnya Pengalaman Pengguna</h3>
+        <p>
+            Website yang baik tidak hanya memiliki tampilan menarik,
+            tetapi juga harus mudah digunakan.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>02. Memahami Kebutuhan Pengguna</h3>
+        <p>
+            Masukan pengguna membantu menemukan kekurangan
+            yang mungkin tidak terlihat oleh pembuat website.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>03. Evaluasi dan Perbaikan</h3>
+        <p>
+            Pengujian ulang diperlukan untuk mengevaluasi
+            perubahan yang telah dilakukan.
+        </p>
+    </div>
+
+</section>
+
+<footer>
+    <strong>SMAN 16 BEKASI</strong>
+    <p>Case Study UX Research & Usability Testing</p>
+    © 2026 SMAN 16 Bekasi. All Rights Reserved.
+</footer>
+
+</main>
+
+<script>
+function toggleMenu() {
+    document.getElementById("sidebar").classList.toggle("show");
+}
+
+// Menutup sidebar setelah menu diklik di HP
+document.querySelectorAll(".sidebar a").forEach(link => {
+    link.addEventListener("click", function() {
+        document.getElementById("sidebar").classList.remove("show");
+    });
+});
+
+// Menandai menu yang sedang aktif
+const sections = document.querySelectorAll("section, #overview");
+const links = document.querySelectorAll(".sidebar a");
+
+window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 150) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    links.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
